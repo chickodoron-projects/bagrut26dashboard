@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>בנק שאלות בגרות 2026</title>
+<meta name="theme-color" content="#6366f1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="בגרות חנג 2026">
+<meta name="description" content="דאשבורד בגרויות חינוך גופני 2026 - 662 שאלות, 15 נושאים">
+<link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%22%D7%93%D7%90%D7%A9%D7%91%D7%95%D7%A8%D7%93%20%D7%91%D7%92%D7%A8%D7%95%D7%99%D7%95%D7%AA%20%D7%97%D7%A0%D7%92%202026%22%2C%22short_name%22%3A%22%D7%91%D7%92%D7%A8%D7%95%D7%AA%20%D7%97%D7%A0%D7%92%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23faf9f7%22%2C%22theme_color%22%3A%22%236366f1%22%2C%22orientation%22%3A%22any%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%2527http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%2527%2520viewBox%253D%25270%25200%2520100%2520100%2527%253E%253Ctext%2520y%253D%2527.9em%2527%2520font-size%253D%252780%2527%253E%25F0%259F%2593%259A%253C%252Ftext%253E%253C%252Fsvg%253E%22%2C%22sizes%22%3A%22any%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
+<title>דאשבורד בגרויות חנג 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Noto+Serif+Hebrew:wght@700;900&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -92,7 +98,7 @@ body { font-family:'Heebo',sans-serif; background:var(--bg); color:var(--text); 
 .nav-yr { border-bottom:2px solid var(--blue); background:var(--blue-bg); justify-content:center; }
 .nav-yr .nav-btn.on { background:var(--blue); color:#fff; border-color:var(--blue); }
 .yr-panel-label { font-size:.55rem; color:var(--dim); padding:.15rem .4rem; background:var(--card2); border-radius:3px; font-weight:600; margin-left:.2rem; }
-.nav-section-label { border-radius:18px !important; font-size:.65rem !important; font-weight:800 !important; background:var(--text) !important; color:var(--bg) !important; border-color:var(--text) !important; opacity:1 !important; cursor:default !important; pointer-events:none; padding:.3rem .7rem !important; }
+.nav-section-label { border-radius:18px !important; font-size:.65rem !important; font-weight:800 !important; background:var(--text) !important; color:var(--bg) !important; border-color:var(--text) !important; opacity:1 !important; cursor:pointer !important; padding:.3rem .7rem !important; }
 
 /* Panels */
 .panel { display:none; padding:1rem; max-width:1100px; margin:0 auto; }
@@ -162,6 +168,18 @@ body { font-family:'Heebo',sans-serif; background:var(--bg); color:var(--text); 
 .ib { padding:.2rem .5rem; border:1.5px solid var(--line); border-radius:6px; background:var(--card2); color:var(--text); font-size:.72rem; cursor:pointer; display:inline-flex; align-items:center; transition:all .12s; opacity:1; }
 .ib:hover { background:var(--card); border-color:var(--blue); color:var(--blue); }
 .ib.on { background:var(--blue); color:#fff; border-color:var(--blue); }
+
+/* Close all button on individual card */
+.close-all-btn { display:none; padding:.15rem .45rem; border:1.5px solid var(--red); color:var(--red); background:transparent; border-radius:6px; font-size:.6rem; font-weight:700; cursor:pointer; font-family:'Heebo'; transition:all .12s; margin-right:.2rem; }
+.close-all-btn:hover { background:var(--red); color:#fff; }
+
+/* WhatsApp share button */
+.wa-share { padding:.2rem .35rem; border:1.5px solid #25D366; color:#25D366; background:transparent; border-radius:6px; cursor:pointer; transition:all .12s; display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; position:relative; z-index:2; }
+.wa-share:hover { background:#25D366; }
+.wa-share:hover svg path { fill:#fff; }
+.wa-share svg, .wa-share svg * { pointer-events:none; }
+.wa-share svg { width:14px; height:14px; }
+.wa-share svg path { fill:#25D366; transition:fill .12s; }
 
 /* Answer */
 .ans { max-height:0; overflow:hidden; transition:max-height .3s,padding .2s; background:var(--green-bg); border-right:2px solid var(--green); border-radius:0 0 6px 6px; padding:0 .6rem; font-size:.72rem; line-height:1.6; color:var(--text2); }
@@ -402,10 +420,7 @@ body { font-family:'Heebo',sans-serif; background:var(--bg); color:var(--text); 
 .fc-recur-badge.ok { background:#d1fae5; color:#065f46; }
 
 /* Answer box for forecast */
-.fc-ans-btn { font-size:.65rem; padding:.15rem .5rem; border:1px solid var(--blue); color:var(--blue); background:transparent; border-radius:4px; cursor:pointer; margin-top:.3rem; font-family:'Heebo'; transition:all .12s; }
-.fc-ans-btn:hover { background:var(--blue); color:#fff; }
-.fc-ans-box { display:none; margin-top:.4rem; padding:.5rem .6rem; background:var(--card2); border-radius:6px; border-right:3px solid var(--blue); font-size:.68rem; line-height:1.7; color:var(--text); direction:rtl; white-space:pre-wrap; }
-.fc-ans-box.open { display:block; }
+/* (merged with primary definition above) */
 .fc-open-badge { font-size:.6rem; background:#d1fae5; color:#065f46; border-radius:4px; padding:.08rem .3rem; margin-right:.3rem; }
 
 
@@ -675,7 +690,7 @@ mark.search-hl { background:#fef08a; color:#92400e; border-radius:2px; padding:0
 .exsim-timer { font-size:1.1rem; font-weight:800; color:var(--blue); font-variant-numeric:tabular-nums; min-width:55px; }
 .exsim-timer.warn { color:#ef4444; animation:pulse 1s infinite; }
 .exsim-close { padding:.3rem .7rem; border:1px solid var(--line); background:transparent; color:var(--dim); border-radius:6px; font-size:.72rem; cursor:pointer; font-family:'Heebo'; }
-.exsim-body { flex:1; overflow-y:auto; padding:1rem 1.4rem; max-width:820px; width:100%; margin:0 auto; }
+/* exsim-body defined below with final styling */
 
 /* Setup screen */
 .exsim-setup { max-width:560px; margin:2rem auto; }
@@ -691,7 +706,7 @@ mark.search-hl { background:#fef08a; color:#92400e; border-radius:2px; padding:0
 .exsim-instructions strong { color:var(--text); }
 
 /* Exam questions */
-.exsim-part-title { font-size:.85rem; font-weight:800; color:var(--blue); margin:1.2rem 0 .5rem; padding:.4rem .8rem; background:rgba(59,130,246,.06); border-radius:7px; border-right:3px solid var(--blue); }
+/* exsim-part-title defined below with final styling */
 .exsim-part-sub { font-size:.72rem; color:var(--dim); margin-bottom:.8rem; }
 .exsim-q-block { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1rem 1.2rem; margin-bottom:.8rem; }
 .exsim-q-header { display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem; }
@@ -801,7 +816,7 @@ mark.search-hl { background:#fef08a; color:#92400e; border-radius:2px; padding:0
 
 
 /* ===== NAV ACTIONS ROW (special buttons above topics) ===== */
-.nav-actions { display:flex; align-items:center; justify-content:center; gap:.5rem; padding:.4rem .8rem; background:var(--card); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:101; flex-wrap:wrap; position:relative; }
+.nav-actions { display:flex; align-items:center; justify-content:center; gap:.5rem; padding:.4rem .8rem; background:var(--card); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:101; flex-wrap:wrap; }
 
 
 /* font-ctrl moved to daily strip */
@@ -885,7 +900,12 @@ body.scrolled-down .nav-expand-hint { display: inline; }
 .nav-btn.cat-physio.on { background:rgba(6,182,212,.12); color:#0e7490; border-color:#06b6d4; }
 
 /* Category legend */
-.cat-legend { display:flex; align-items:center; justify-content:center; gap:1rem; padding:.2rem .8rem .3rem; background:var(--card); border-bottom:1px solid var(--line); font-size:.62rem; color:var(--dim); }
+.cat-legend { display:flex; align-items:center; justify-content:center; gap:.5rem; padding:.2rem .8rem .3rem; background:var(--card); border-bottom:1px solid var(--line); font-size:.62rem; color:var(--dim); }
+.cat-filter-btn { cursor:pointer; padding:.15rem .5rem; border-radius:12px; border:1.5px solid transparent; transition:all .15s; user-select:none; display:flex; align-items:center; gap:.3rem; }
+.cat-filter-btn:hover { background:var(--card2); }
+.cat-filter-btn.active[data-cat="history"] { background:rgba(245,158,11,.12); border-color:#f59e0b; color:#b45309; font-weight:700; }
+.cat-filter-btn.active[data-cat="psych"]   { background:rgba(236,72,153,.12); border-color:#ec4899; color:#be185d; font-weight:700; }
+.cat-filter-btn.active[data-cat="physio"]  { background:rgba(6,182,212,.12);  border-color:#06b6d4; color:#0e7490; font-weight:700; }
 .cat-dot { width:8px; height:8px; border-radius:50%; display:inline-block; margin-left:.3rem; }
 
 
@@ -922,13 +942,11 @@ body.scrolled-down .nav-expand-hint { display: inline; }
 <body>
 
 <div class="hdr">
-  <h1>📚 בגרות חינוך גופני 2026</h1>
+  <h1>📚 בגרות מגמת חינוך גופני 2026</h1>
   <span class="hdr-meta">662 שאלות · 2011-2025 · 15 נושאים</span>
   <div class="hdr-controls">
     <div class="font-ctrl-strip" id="fontCtrlHeader">
-      <button onclick="changeFontSize(-1)" title="הקטן פונט">A-</button>
-      <span id="fontSizeLabel">140%</span>
-      <button onclick="changeFontSize(1)" title="הגדל פונט">A+</button>
+      <button onclick="cycleFontSize()" title="שנה גודל פונט" id="fontCycleBtn">A</button>
     </div>
     <button class="theme-btn" id="themeBtn" onclick="document.documentElement.classList.toggle('dark');this.textContent=document.documentElement.classList.contains('dark')?'☀️':'🌙'">🌙</button>
   </div>
@@ -964,10 +982,10 @@ body.scrolled-down .nav-expand-hint { display: inline; }
 </div>
 
 <div class="nav-actions" id="navActions"></div>
-<div class="cat-legend">
-  <span><span class="cat-dot" style="background:#f59e0b"></span>תולדות החינוך הגופני</span>
-  <span><span class="cat-dot" style="background:#ec4899"></span>פסיכולוגיה של הספורט</span>
-  <span><span class="cat-dot" style="background:#06b6d4"></span>פיזיולוגיה של המאמץ</span>
+<div class="cat-legend" id="catLegend">
+  <span class="cat-filter-btn" data-cat="history" onclick="filterNavByCat(this,'history')"><span class="cat-dot" style="background:#f59e0b"></span>תולדות החינוך הגופני</span>
+  <span class="cat-filter-btn" data-cat="psych" onclick="filterNavByCat(this,'psych')"><span class="cat-dot" style="background:#ec4899"></span>פסיכולוגיה של הספורט</span>
+  <span class="cat-filter-btn" data-cat="physio" onclick="filterNavByCat(this,'physio')"><span class="cat-dot" style="background:#06b6d4"></span>פיזיולוגיה של המאמץ</span>
 </div>
 <nav class="nav" id="nav"></nav>
 <nav class="nav nav-yr" id="navYr"></nav>
@@ -4568,16 +4586,32 @@ const ANSWERS_DATA = {"yavanit": [{"q": "מהו האפביון ומה תפקיד
 function toggleFcAnswer(btn, id) {
   const box = document.getElementById(id);
   if (!box) return;
-  const isOpen = box.classList.contains('open');
-  box.classList.toggle('open', !isOpen);
-  btn.textContent = isOpen ? '📖 הצג תשובה' : '📖 הסתר תשובה';
+  box.classList.toggle('open');
+  btn.classList.toggle('on');
+  // Show/hide close button
+  const row = btn.closest('.q-btns');
+  if (row) {
+    const closeBtn = row.querySelector('.close-all-btn');
+    if (closeBtn) {
+      const anyOpen = row.parentElement.querySelectorAll('.fc-ans-box.open').length > 0;
+      closeBtn.style.display = anyOpen ? 'inline-flex' : 'none';
+    }
+  }
+}
+
+function closeFcRow(btn) {
+  const row = btn.closest('.q-btns');
+  const parent = row ? row.parentElement : null;
+  if (!parent) return;
+  parent.querySelectorAll('.fc-ans-box.open').forEach(b => b.classList.remove('open'));
+  row.querySelectorAll('.ib.on').forEach(b => b.classList.remove('on'));
+  btn.style.display = 'none';
 }
 
 function toggleAllFcAnswers(btn) {
   const all = document.querySelectorAll('.fc-ans-box');
   const anyOpen = [...all].some(b => b.classList.contains('open'));
   all.forEach(b => b.classList.toggle('open', !anyOpen));
-  document.querySelectorAll('.fc-ans-btn').forEach(b => b.textContent = anyOpen ? '📖 הצג תשובה' : '📖 הסתר תשובה');
   btn.textContent = anyOpen ? '📖 הצג כל התשובות' : '📖 הסתר כל התשובות';
 }
 
@@ -4744,12 +4778,48 @@ const QA_ANSWERS = {
 
 const FORECAST = {"yavanit":{"name":"🏛 יוון הקלאסית","total":29,"years_present":12,"mikud":"כולל — עמ׳ 1, 5-11 (מאגוניסטיקה)","pattern":"אפביון חוזר כל 2 שנים. ענפי כתר/פנטאתלון עקבי. 2024 כבד (5 שאלות), 2025 קל (1). 2026 צפוי 2-3 שאלות.","freq":{"2011":1,"2014":1,"2015":3,"2016":3,"2017":1,"2018":2,"2019":3,"2020":4,"2022":4,"2023":1,"2024":5,"2025":1},"questions":[{"q":"מהו האפביון ומה תפקידו?","type":"specific","stars":5,"reason":"חזר ב-2016, 2019, 2020, 2022 — לא ב-2023-2025!"},{"q":"ציין ענפי ספורט בפנטאתלון / משחקי כתר","type":"specific","stars":4,"reason":"חוזר כל 2-3 שנים"},{"q":"גורמים להתפתחות תרבות הגוף ביוון הקלאסית","type":"specific","stars":3,"reason":"היה ב-2016, 2020 — לא מאז 5 שנים"}]},"aslam":{"name":"☪️ אסלאם ונצרות","total":48,"years_present":14,"mikud":"עמ׳ 114-119 (לא כולל חינוך גופני באסלאם, עמ׳ 119), לא כולל משחקי ילדים (119-122), לא כולל תנועה בהלכה (122-124)","pattern":"הנושא הכי עקבי — תמיד 3 שאלות בשנה. מבנה קבוע: שאלה קצרה פרק א + 2 מעמיקות. כנסייה לא ב-2024-2025!","freq":{"2011":3,"2012":3,"2013":3,"2014":3,"2015":3,"2016":3,"2017":3,"2018":3,"2019":3,"2020":4,"2021":7,"2022":4,"2023":3,"2025":3},"questions":[{"q":"עמדת הכנסייה נגד ספורט — ציין 2 נימוקים","type":"specific","stars":5,"reason":"חזר 2012, 2017, 2021, 2023 — כל 2-3 שנים. לא ב-2024-2025!"},{"q":"מרוץ הסוסים — תאר + ציין 2 דוגמאות לחשיבותו","type":"specific","stars":4,"reason":"היה ב-2013 ו-2020 — לא מאז 5 שנים"},{"q":"אל-ג׳זאלי — תפקידו בחינוך ילדים לפעילות גופנית","type":"specific","stars":3,"reason":"היה ב-2014, 2015 — לא מאז 10 שנים"}]},"maccabiah":{"name":"🕍 המכביות","total":31,"years_present":13,"mikud":"עמ׳ 19-25 — להתמקד בשלוש מכביות לבחירת המורה","pattern":"יקוטיאלי ומטרות — כמעט כל שנה. דחיית 1938 לא ב-2025. שאלת 'בחר מכבייה' — מגמה חזקה מ-2023.","freq":{"2012":2,"2013":3,"2014":1,"2015":1,"2016":2,"2017":2,"2018":3,"2019":1,"2020":2,"2021":5,"2022":1,"2023":5,"2025":3},"questions":[{"q":"בחר מכבייה אחת שלמדת עליה — ציין שנה ומאפיין ייחודי","type":"open","stars":5,"reason":"מיקוד: שלוש מכביות לבחירת המורה. בדיוק הסגנון של 2023 ו-2025"},{"q":"סיבות לדחיית המכבייה השלישית (1938) — ציין 2","type":"specific","stars":4,"reason":"לא ב-2025. חזר ב-2013, 2017, 2020, 2021"},{"q":"מטרות המכבייה לפי יקוטיאלי — ציין 2-3","type":"specific","stars":4,"reason":"בסיס קבוע — כמעט כל שנה"}]},"olympic":{"name":"🏅 אולימפיאדה","total":45,"years_present":14,"mikud":"עמ׳ 51-67 (ישראל והתנועה האולימפית) + עמ׳ 69-93 (שלושה ספורטאים לבחירת המורה)","pattern":"אסון מינכן לא ב-2024-2025. ספורטאים יהודים — מגמה חזקה. פיפטי-פיפטי היה ב-2024.","freq":{"2011":5,"2012":3,"2013":3,"2014":4,"2015":1,"2016":1,"2017":1,"2018":1,"2019":4,"2020":1,"2021":11,"2023":3,"2024":5,"2025":2},"questions":[{"q":"אסון מינכן — מתי, מי, מה קרה למשלחת הישראלית","type":"specific","stars":5,"reason":"חזר 2013, 2021, 2023 — לא ב-2024-2025! כל 2-4 שנים"},{"q":"בחר ספורטאי יהודי שלמדת עליו — ענף, שנה, הישג","type":"open","stars":5,"reason":"מיקוד מפורש: שלושה ספורטאים לבחירה. היה ב-2021, 2025"},{"q":"הסכם פיפטי-פיפטי — מה קבע ומה תרומתו","type":"specific","stars":3,"reason":"היה ב-2024 — פחות סביר לחזרה מיידית"}]},"nashim":{"name":"♀️ ספורט נשים","total":21,"years_present":11,"mikud":"עמ׳ 21-22, 26-31 + שלוש ספורטאיות לבחירת המורה","pattern":"ל.כ.ן לא מ-2021. נשירה חוזר כל 3 שנים. שאלות 'ציין ספורטאית' — מגמה חזקה.","freq":{"2012":2,"2013":1,"2014":2,"2015":2,"2016":1,"2017":3,"2018":1,"2020":1,"2022":4,"2023":1,"2025":3},"questions":[{"q":"ציין ספורטאית ישראלית — ענף + הישג בינלאומי","type":"open","stars":5,"reason":"מיקוד: שלוש ספורטאיות לבחירה. היה ב-2013, 2015, 2025"},{"q":"אגודת ל.כ.ן — מהי ומה תרומתה לספורט נשים","type":"specific","stars":4,"reason":"לא מ-2021! היה ב-2014, 2016, 2020 — כל 3-4 שנים"},{"q":"סיבות לנשירת נשים מהספורט התחרותי","type":"specific","stars":4,"reason":"חוזר עקבי: 2015, 2022, 2025"}]},"ishiyot":{"name":"🧠 אישיות","total":54,"years_present":15,"mikud":"פרויד+אדלר+רוג׳רס (עמ׳ 15-29). אריקסון — 2 שלבים לבחירה (עמ׳ 23-27). מופנמות עמ׳ 36-38 כולל+40-41+43. ללא ממצאי מחקרים. ❌ ביהיביוריזם, ממצאי מחקרים, האל-ספנס.","pattern":"הנושא הגדול ביותר. אריקסון ורוג׳רס לא ב-2023-2025. אדלר כל 3 שנים. אינטרוורט כמעט כל שנה.","freq":{"2011":3,"2012":5,"2013":4,"2014":3,"2015":5,"2016":4,"2017":3,"2018":3,"2019":2,"2020":3,"2021":9,"2022":6,"2023":1,"2024":2,"2025":1},"questions":[{"q":"פרויד — מודל מבני: איד, אגו, סופר-אגו + דוגמה בספורט","type":"specific","stars":5,"reason":"במיקוד! לא ב-2023-2025. היה ב-2011, 2012, 2016, 2021, 2025"},{"q":"אריקסון — הצג 2 שלבים שלמדת: שם שלב, גיל, משבר","type":"open","stars":5,"reason":"מיקוד: שני שלבים לבחירת המורה. לא ב-2023-2025!"},{"q":"רוג׳רס — מניע לפעולה, עצמי אידיאלי, התפתחות","type":"specific","stars":5,"reason":"לא ב-2023-2025! מוגדר במיקוד. היה ב-2019, 2022"},{"q":"אדלר — רגש נחיתות + כיצד הפרט מפצה","type":"specific","stars":4,"reason":"במיקוד! לא ב-2023-2025. היה ב-2016, 2018, 2020, 2023"},{"q":"אינטרוורט/אקסטרוורט — ציין תכונות + יתרון בספורט","type":"specific","stars":4,"reason":"במיקוד (עמ׳ 36-38+40-41)! כמעט כל שנה. לא ב-2023-2025"}]},"motivatzia":{"name":"🎯 מוטיבציה","total":30,"years_present":12,"mikud":"הגדרה (47-49), מאסלו (55-57), ייחוס סיבתי (60-64), הצבת מטרות (66-67). ללא ממצאי מחקרים.","pattern":"2025 כבד (4 שאלות — מאסלו). מוטיבציה פנימית/חיצונית לא ב-2023-2025. ייחוס סיבתי היה ב-2024.","freq":{"2011":3,"2012":1,"2013":2,"2015":1,"2017":2,"2018":4,"2019":2,"2020":2,"2021":2,"2023":3,"2024":4,"2025":4},"questions":[{"q":"מוטיבציה פנימית מול חיצונית — הגדר + דוגמה לכל אחת","type":"specific","stars":4,"reason":"לא ב-2023-2025! היה ב-2017, 2020, 2021"},{"q":"מאסלו — ציין קטגוריות + הסבר + דוגמה לספורטאי","type":"specific","stars":5,"reason":"במיקוד! היה ב-2013, 2015, 2025. לא ב-2023-2024"},{"q":"הצבת מטרות (רובסון) — חשיבות + ציין 2 צעדים","type":"specific","stars":5,"reason":"במיקוד! חזר חזק: 2018, 2023, 2024. מגמה עולה!"}]},"lachatz":{"name":"⚖️ לחץ","total":44,"years_present":14,"mikud":"מודלים לחץ+תגובה (69-75, ללא אינטראקציה), סימפטומים (76-79), עוררות+חרדה (81-87, ללא חרדה חשיבתית), שלוש שיטות לבחירה (90-104). ללא ממצאי מחקרים.","pattern":"עקבי ב-14 שנים. 2024 ו-2025 כבדים. שיטות טיפול 'לבחירה' — תמיד. סימפטומים לחץ — חדש במיקוד.","freq":{"2012":1,"2013":1,"2014":2,"2015":1,"2016":3,"2017":2,"2018":1,"2019":3,"2020":4,"2021":7,"2022":4,"2023":3,"2024":7,"2025":5},"questions":[{"q":"בחר שיטת טיפול בלחץ — תאר ויישם על ספורטאי","type":"open","stars":5,"reason":"מיקוד מפורש: שלוש שיטות לבחירה. היה ב-2019, 2023, 2025"},{"q":"סימפטומים של לחץ בארבעה תחומים (גוף, רגש, חשיבה, התנהגות)","type":"specific","stars":4,"reason":"נכנס לראשונה במיקוד תשפ\"ו — תחום חדש!"},{"q":"מודל U הפוך — שני משתנים + מרווח אופטימום","type":"specific","stars":5,"reason":"במיקוד! היה ב-2012, 2013, 2017, 2021, 2025. עקבי מאוד!"}]},"kosher":{"name":"💪 תורת הכושר","total":95,"years_present":14,"mikud":"מרכיבי כושר (95-116, ללא גורמי הישג), עקרונות אימון (349-356), שיטות כוח (357-380). שיטות סבולת (393-405) — לא במיקוד!","pattern":"2025 ירידה חדה ל-1 שאלה. 2026 צפוי חזרה חזקה. שיטות סבולת הוצאו מהמיקוד! אימון יתר — כל 3 שנים.","freq":{"2011":7,"2012":3,"2014":6,"2015":7,"2016":6,"2017":5,"2018":7,"2019":6,"2020":7,"2021":17,"2022":9,"2023":5,"2024":9,"2025":1},"questions":[{"q":"אימון יתר — מהו + ציין 3-4 סימנים + פיצוי יסף","type":"specific","stars":5,"reason":"לא ב-2025! היה ב-2011, 2018, 2021, 2024 — כל 3 שנים"},{"q":"מרכיבי כושר גופני + מבדק לאחד מהם","type":"specific","stars":5,"reason":"עקבי מאוד לאורך השנים. לא ב-2025"},{"q":"אימון פליאומטרי — מהו + ענפים מתאימים","type":"specific","stars":4,"reason":"לא מאז 2020! היה ב-2017, 2020 — 5 שנים"},{"q":"מיומנות פתוחה מול סגורה — הגדר + דוגמה לכל אחת","type":"specific","stars":4,"reason":"כל 3 שנים: 2016, 2021, 2024"},{"q":"שיטות אימון סבולת (אינטרוולים, רצף, פארטלק)","type":"excluded","stars":0,"reason":"עמ׳ 393-405 — הוצא מהמיקוד תשפ\"ו!"}]},"shririm":{"name":"🦴 שרירים","total":62,"years_present":14,"mikud":"שרירי שלד: היכרות, מבנה, סוגי התכווצות (117-131). תאוריית קורים מחליקים (133-139) — לא במיקוד!","pattern":"אגוניסט/אנטגוניסט לא ב-6 שנים! התכווצות אקסצנטרית — מגמה עולה. פיקסטור לא מאז 2018. קורים מחליקים הוצאו.","freq":{"2012":3,"2013":5,"2014":1,"2015":4,"2016":4,"2017":4,"2018":5,"2019":4,"2020":6,"2021":10,"2022":6,"2023":4,"2024":3,"2025":3},"questions":[{"q":"אגוניסט ואנטגוניסט — הגדר + ציין בתרגיל ספציפי (מפרק + תנועה)","type":"specific","stars":5,"reason":"לא ב-2021-2025! היה כמעט כל שנה עד 2020 — 6 שנים היעדר"},{"q":"התכווצות איזוקינטית — מהי + מדוע רק במכשירים","type":"specific","stars":4,"reason":"לא מאז 2020. היה ב-2016, 2020 — כל 4 שנים"},{"q":"שריר מקבע (פיקסטור) — תפקיד + דוגמה","type":"specific","stars":4,"reason":"לא מאז 2018 — 7 שנים"},{"q":"תאוריית קורים מחליקים","type":"excluded","stars":0,"reason":"עמ׳ 133-139 — הוצא מהמיקוד תשפ\"ו!"}]},"guf":{"name":"🫀 הרכב הגוף","total":26,"years_present":12,"mikud":"גוף רזה ושומן הגוף (עמ׳ 37-44)","pattern":"שומן חיוני/מאוחסן — כמעט כל שנה. השמנת אגס/תפוח לא מ-2013 — 12 שנים! 2025 כבד (4 שאלות).","freq":{"2011":1,"2012":3,"2013":6,"2014":3,"2015":1,"2016":1,"2017":1,"2018":1,"2019":1,"2021":3,"2023":1,"2025":4},"questions":[{"q":"השמנת אגס מול השמנת תפוח — מאפיינים + איזו מסוכנת יותר","type":"specific","stars":4,"reason":"לא מ-2013! 12 שנים — הגיע הזמן"},{"q":"שומן חיוני מול מאוחסן — הבדל + תפקידים","type":"specific","stars":3,"reason":"כמעט כל שנה. היה ב-2025"}]},"atzabim":{"name":"⚡ מערכת העצבים","total":20,"years_present":9,"mikud":"עמ׳ 75-85 — ללא דחף עצבי והעברתו (סעיפים 1.8.4-1.8.5)","pattern":"נושא קטן (20 שאלות). קשת רפלקס לא מ-2018. קינסתזיה לא מ-2016. סימפתטית חזרה ב-2025.","freq":{"2011":2,"2014":3,"2015":4,"2016":2,"2018":2,"2019":1,"2023":2,"2024":3,"2025":1},"questions":[{"q":"קשת הרפלקס — ציין 3 מרכיבים + תפקיד כל אחד","type":"specific","stars":4,"reason":"לא מאז 2018 — 7 שנים! היה ב-2015, 2018"},{"q":"קינסתזיה — מהי + תרגיל לפיתוחה","type":"specific","stars":4,"reason":"לא מאז 2016 — 9 שנים! היה ב-2011, 2016"},{"q":"סימפתטית ופאראסימפתטית — השפעה על קצב לב","type":"specific","stars":2,"reason":"היה ב-2025 — פחות סביר"}]},"energia":{"name":"⚡ אנרגיה","total":31,"years_present":10,"mikud":"מסלולי אספקת אנרגיה (עמ׳ 141-154)","pattern":"מסלול לקטי — הכי עקבי. א-לקטי לא מאז 2022. מסלול אירובי היה ב-2024. 2025 כבד (4 שאלות).","freq":{"2011":1,"2013":4,"2017":2,"2019":2,"2020":3,"2021":4,"2022":4,"2023":3,"2024":4,"2025":4},"questions":[{"q":"מסלול אנארובי-לקטי — תיאור + היכן בתא + מאפיין + דוגמה","type":"specific","stars":5,"reason":"הכי עקבי בנושא. לא ב-2025 בצורה ישירה"},{"q":"מסלול א-לקטי — מהו + מקורות אנרגיה + ענף + מאפיינים","type":"specific","stars":4,"reason":"לא מאז 2022. היה ב-2017, 2022 — כל 5 שנים"},{"q":"בחר ענף ספורט — קבע מסלול אנרגיה דומיננטי + נמק","type":"open","stars":4,"reason":"סגנון חוזר: 2019, 2022, 2023, 2024, 2025"}]},"neshima":{"name":"🫁 נשימה","total":49,"years_present":14,"mikud":"עמ׳ 243-254 (ללא נפחי ריאות 250-252). עמ׳ 257-265 — לא במיקוד!","pattern":"עקבי ב-14 שנים. שרירי שאיפה היה ב-2025. אוורור ריאתי לא מ-2022. נשימה תאית/חיצונית — הוצאה!","freq":{"2012":4,"2013":4,"2014":2,"2015":3,"2016":3,"2017":3,"2018":2,"2019":3,"2020":3,"2021":7,"2022":4,"2023":3,"2024":4,"2025":4},"questions":[{"q":"אוורור ריאתי — הגדרה + מרכיבים (VT × קצב) + ערך במנוחה","type":"specific","stars":5,"reason":"לא מאז 2022! היה ב-2017, 2022 — כל 5 שנים"},{"q":"רזרבה נשימתית — מהי ומה היא מצביעה עליה","type":"specific","stars":4,"reason":"לא מאז 2020. היה ב-2012, 2020 — כל 8 שנים"},{"q":"נשימה תאית / חיצונית","type":"excluded","stars":0,"reason":"עמ׳ 257-265 — לא במיקוד תשפ\"ו!"}]},"dam":{"name":"🩸 מערכת הדם","total":77,"years_present":15,"mikud":"עמ׳ 269-292 (ללא פעילות מכאנית 277-280). מחלות לב (459-465). עמ׳ 292-303 — לא במיקוד!","pattern":"הנושא עם הכי שאלות (77). תפוקת לב כמעט כל שנה. LDL/HDL לא מ-2014 — 11 שנים! אק\"ג מגמה עולה.","freq":{"2011":8,"2012":8,"2013":3,"2014":2,"2015":2,"2016":3,"2017":6,"2018":3,"2019":4,"2020":5,"2021":12,"2022":5,"2023":4,"2024":5,"2025":7},"questions":[{"q":"LDL ו-HDL — מדוע רע/טוב + קשר לטרשת עורקים + פעילות גופנית","type":"specific","stars":5,"reason":"לא מאז 2014 — 11 שנים! היה ב-2012, 2014"},{"q":"אוטם שריר הלב — מהו + גורם + תהליך + גורמי סיכון","type":"specific","stars":4,"reason":"לא מאז 2021. היה ב-2014, 2021 — כל 7 שנים"},{"q":"תפוקת לב — הגדרה + שינויים ממנוחה למאמץ","type":"specific","stars":4,"reason":"כמעט כל שנה. עקבי מאוד"},{"q":"מסתמי הלב — ציין 2 + מיקום + תפקיד","type":"specific","stars":3,"reason":"לא ב-2023-2025. היה עקבי עד 2022"},{"q":"תכולת פלזמה / שינויי לחץ ונפח","type":"excluded","stars":0,"reason":"עמ׳ 292-303 ועמ׳ 279-280 — לא במיקוד תשפ\"ו!"}]}};
 
+// Filter topic nav buttons by category
+let _activeCatFilter = null;
+function filterNavByCat(btn, cat) {
+  const nav = document.getElementById('nav');
+  if (!nav) return;
+  const allBtns = nav.querySelectorAll('.nav-btn:not(.nav-section-label):not(.fc-nav-btn)');
+  const filterBtns = document.querySelectorAll('.cat-filter-btn');
+
+  // Toggle: if same category clicked again, show all
+  if (_activeCatFilter === cat) {
+    _activeCatFilter = null;
+    filterBtns.forEach(b => b.classList.remove('active'));
+    allBtns.forEach(b => b.style.display = '');
+    return;
+  }
+
+  _activeCatFilter = cat;
+  filterBtns.forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  allBtns.forEach(b => {
+    const tid = b.dataset.topicId;
+    if (tid) {
+      const topicCat = getCat(tid);
+      b.style.display = (topicCat === cat) ? '' : 'none';
+    }
+  });
+}
+
 function renderNav() {
   const nav = document.getElementById('nav');
   const label = document.createElement('button');
   label.className = 'nav-btn nav-section-label';
   label.textContent = '📚 נושאים';
-  label.disabled = true;
+  label.disabled = false;
+  label.style.cursor = 'pointer';
+  label.style.pointerEvents = 'auto';
+  label.onclick = () => {
+    _activeCatFilter = null;
+    document.querySelectorAll('.cat-filter-btn').forEach(b => b.classList.remove('active'));
+    nav.querySelectorAll('.nav-btn:not(.nav-section-label):not(.fc-nav-btn)').forEach(b => b.style.display = '');
+  };
   nav.appendChild(label);
   // Forecast button first
   // Separator label for special buttons
@@ -4798,6 +4868,7 @@ function renderNav() {
     const cat = getCat(t.id);
     btn.className = 'nav-btn' + (cat ? ' cat-' + cat : '');
     btn.textContent = t.name;
+    btn.dataset.topicId = t.id;
     btn.onclick = () => activateTab(t.id, btn);
     nav.appendChild(btn);
   });
@@ -4900,6 +4971,7 @@ html += '<div class="tog" onclick="toggleAllYr(\'p-yr-' + year + '\',\'ans\',thi
       if ((q.tag||'').startsWith('נ')) {
         html += '<span style="font-size:.5rem;color:#e67e22;font-weight:700">נבצרים</span>';
       }
+      html += '<span class="wa-share" onclick="shareWA(this)" title="שתף בוואטסאפ"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>';
       html += '</div>';
       html += '<div class="yr-body">';
       html += '<div class="q">' + q.q;
@@ -4907,6 +4979,7 @@ html += '<div class="tog" onclick="toggleAllYr(\'p-yr-' + year + '\',\'ans\',thi
       html += '<span class="ib" title="רמז" onclick="togSib(this,\'hnt\')">💡</span>';
       html += '<span class="ib" title="מילות מפתח" onclick="togSib(this,\'kws\')">🔑</span>';
       html += '<span class="ib" title="תשובה" onclick="togSib(this,\'ans\')">📖</span>';
+      html += '<span class="close-all-btn" onclick="closeAllInCard(this)" title="סגור הכל">✕</span>';
       html += '</div></div>';
       html += '<div class="ans">' + (q.ans ? '<p>' + highlightAns(q.ans, q.kw||[]) + '</p>' : '<p>עיין בחומר הלימוד.</p>') + '</div>';
       html += '<div class="kws">' + (q.kw||[]).map(k => '<span class="kw">' + k + '</span>').join('') + '</div>';
@@ -5032,6 +5105,7 @@ function buildPanel(topic) {
         <div class="yr-head">
           <span class="yr-badge" style="background:${bgColor}">${year}</span>
           ${q.tag ? `<span style="font-size:.6rem;color:var(--dim)">${q.tag}</span>` : ''}
+          <span class="wa-share" onclick="shareWA(this)" title="שתף בוואטסאפ"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>
         </div>
         <div class="yr-body">
           <div class="q">${q.q}
@@ -5039,6 +5113,7 @@ function buildPanel(topic) {
               <span class="ib" title="רמז" onclick="togSib(this,'hnt')">💡</span>
               <span class="ib" title="מילות מפתח" onclick="togSib(this,'kws')">🔑</span>
               <span class="ib" title="תשובה" onclick="togSib(this,'ans')">📖</span>
+              <span class="close-all-btn" onclick="closeAllInCard(this)" title="סגור הכל">✕</span>
             </div>
           </div>
           <div class="ans">${q.ans ? `<p>${highlightAns(q.ans, q.kw||[])}</p>` : '<p>עיין בחומר הלימוד.</p>'}</div>
@@ -5058,11 +5133,45 @@ function buildPanel(topic) {
 // Toggle individual
 function togSib(btn, cls) {
   const card = btn.closest('.yr-body');
+  if (!card) return;
   const el = card.querySelector('.' + cls);
   if (el) {
     el.classList.toggle('on');
     btn.classList.toggle('on');
   }
+  // Show/hide the close-all button
+  updateCloseAllBtn(card);
+}
+
+// Close all open items in a single card
+function closeAllInCard(btn) {
+  const card = btn.closest('.yr-body');
+  if (!card) return;
+  card.querySelectorAll('.ans.on, .kws.on, .hnt.on').forEach(el => el.classList.remove('on'));
+  card.querySelectorAll('.ib.on').forEach(ib => ib.classList.remove('on'));
+  btn.style.display = 'none';
+}
+
+// WhatsApp share
+function shareWA(btn) {
+  const card = btn.closest('.yr') || btn.closest('.fc-q-row');
+  if (!card) return;
+  const qEl = card.querySelector('.q') || card.querySelector('.fc-q-text');
+  const ansEl = card.querySelector('.ans') || card.querySelector('.fc-ans-box');
+  const q = qEl ? qEl.textContent.replace(/📖|🔑|💡|✕|🎲/g,'').trim() : '';
+  const a = (ansEl && ansEl.textContent) ? ansEl.textContent.trim().slice(0,300) : '';
+  const text = '📚 שאלת בגרות חנ"ג:\n\n' + q + (a ? '\n\n✅ תשובה:\n' + a : '') + '\n\n🔗 bagrut26dashboard.vercel.app';
+  const url = 'https://wa.me/?text=' + encodeURIComponent(text);
+  const w = window.open(url, '_blank');
+  if (!w) window.location.href = url;
+}
+
+// Show close-all button if anything is open
+function updateCloseAllBtn(card) {
+  const closeBtn = card.querySelector('.close-all-btn');
+  if (!closeBtn) return;
+  const anyOpen = card.querySelector('.ans.on, .kws.on, .hnt.on');
+  closeBtn.style.display = anyOpen ? 'inline-flex' : 'none';
 }
 
 // Toggle all in topic
@@ -5168,8 +5277,23 @@ function buildForecastPanel() {
       let ansHtml = '';
       if (q.type !== 'excluded' && ans) {
         ansIdx++;
-        ansHtml = `<button class="fc-ans-btn" onclick="toggleFcAnswer(this,'${ansId}')">📖 הצג תשובה</button>
-        <div class="fc-ans-box" id="${ansId}">${ans.a}</div>`;
+        const reasonText = q.reason || '';
+        // Extract keywords from answer: take bold terms and key phrases
+        const kwMatches = (ans.a || '').match(/\((\d+)\)[^(]*/g) || [];
+        const kwFromAns = (ans.a || '').split(/[.:,;—\n]/).filter(s => s.trim().length > 2 && s.trim().length < 40).slice(0,6).map(s => s.trim().replace(/^\(\d+\)\s*/,''));
+        // Build hint from first sentence of answer
+        const hintText = (ans.a || '').split('\n')[0].slice(0, 80) + '...';
+        ansHtml = `<div class="q-btns" style="display:flex;gap:2px;margin-top:.4rem;flex-wrap:wrap">
+          <span class="ib" onclick="toggleFcAnswer(this,'${ansId}')" title="תשובה">📖</span>
+          <span class="ib" onclick="toggleFcAnswer(this,'${ansId}-kw')" title="מילות מפתח" style="border-color:var(--gold);color:var(--gold)">🔑</span>
+          <span class="ib" onclick="toggleFcAnswer(this,'${ansId}-hint')" title="רמז" style="border-color:var(--orange);color:var(--orange)">💡</span>
+          ${reasonText ? `<span class="ib" onclick="toggleFcAnswer(this,'${ansId}-stat')" title="רמז סטטיסטי" style="border-color:#8b5cf6;color:#8b5cf6">🎲</span>` : ''}
+          <span class="close-all-btn" onclick="closeFcRow(this)" title="סגור הכל">✕</span>
+        </div>
+        <div class="fc-ans-box" id="${ansId}">${ans.a}</div>
+        <div class="fc-ans-box" id="${ansId}-kw" style="border-right-color:var(--gold);background:var(--gold-bg)">${kwFromAns.map(k => '<span class="kw">' + k + '</span>').join('')}</div>
+        <div class="fc-ans-box" id="${ansId}-hint" style="border-right-color:var(--orange);background:var(--orange-bg)">💡 ${hintText}</div>
+        ${reasonText ? `<div class="fc-ans-box" id="${ansId}-stat" style="border-right-color:#8b5cf6;background:rgba(139,92,246,.06)">🎲 <strong>רמז סטטיסטי:</strong> ${reasonText}</div>` : ''}`;
       }
       return `<div class="fc-q-row ${typeClass}">
         <div class="fc-q-icon">${icon}</div>
@@ -6340,11 +6464,13 @@ function _doSearch(query) {
     card += '<span class="yr-badge" style="background:' + bgColor + '">' + r.year + '</span>';
     card += '<span style="font-size:.55rem;color:var(--dim);background:var(--card2);padding:1px 5px;border-radius:4px">' + escHtml(r.topicName) + '</span>';
     if (r.tag) card += '<span style="font-size:.6rem;color:var(--dim)">' + escHtml(r.tag) + '</span>';
+    card += '<span class="wa-share" onclick="shareWA(this)" title="שתף בוואטסאפ"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>';
     card += '</div><div class="yr-body">';
     card += '<div class="q">' + hl(r.q) + '<div class="q-btns">';
         card += '<span class="ib" title="תשובה" onclick="togSib(this,\x27ans\x27)">📖</span>';
         card += '<span class="ib" title="מילות מפתח" onclick="togSib(this,\x27kws\x27)">🔑</span>';
         card += '<span class="ib" title="רמז" onclick="togSib(this,\'hnt\')">💡</span>';
+        card += '<span class="close-all-btn" onclick="closeAllInCard(this)" title="סגור הכל">✕</span>';
     card += '</div></div>';
     card += '<div class="ans">' + (r.ans ? '<p>' + hl(r.ans) + '</p>' : '<p>עיין בחומר הלימוד.</p>') + '</div>';
     card += '<div class="kws">' + (r.kw||[]).map(k => '<span class="kw">' + escHtml(k) + '</span>').join('') + '</div>';
@@ -6923,8 +7049,18 @@ function exToggle(id) {
 function changeFontSize(dir) {
   _fontSize = Math.max(80, Math.min(140, _fontSize + dir * 10));
   document.documentElement.style.fontSize = _fontSize + '%';
-  const lbl = document.getElementById('fontSizeLabel');
-  if (lbl) lbl.textContent = _fontSize + '%';
+}
+
+const _fontSizes = [100, 120, 140];
+function cycleFontSize() {
+  const idx = _fontSizes.indexOf(_fontSize);
+  _fontSize = _fontSizes[(idx + 1) % _fontSizes.length];
+  document.documentElement.style.fontSize = _fontSize + '%';
+  const btn = document.getElementById('fontCycleBtn');
+  if (btn) {
+    btn.textContent = _fontSize + '%';
+    setTimeout(() => { btn.textContent = 'A'; }, 1200);
+  }
 }
 
 
@@ -7022,6 +7158,23 @@ function toggleTopicInfo(id) {
 
 
 
+</script>
+<script>
+// PWA Service Worker — cache page for offline use
+if ('serviceWorker' in navigator) {
+  const swCode = `
+    const CACHE = 'bagrut-v1';
+    self.addEventListener('install', e => {
+      e.waitUntil(caches.open(CACHE).then(c => c.addAll(['/'])));
+      self.skipWaiting();
+    });
+    self.addEventListener('fetch', e => {
+      e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
+    });
+  `;
+  const blob = new Blob([swCode], {type:'application/javascript'});
+  navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
+}
 </script>
 
 <!-- Student Login Overlay -->
@@ -7135,6 +7288,11 @@ function toggleTopicInfo(id) {
     <!-- Built dynamically -->
   </div>
 </div>
+
+<footer style="text-align:center;padding:1.5rem .8rem;border-top:1px solid var(--line);margin-top:2rem;font-size:.65rem;color:var(--dim);direction:rtl">
+  <div><strong style="color:var(--text)">דורון צ׳יקו</strong></div>
+  <div style="margin-top:.2rem">© 2026 | בגרות מגמת חינוך גופני 41381</div>
+</footer>
 
 </body>
 </html>
