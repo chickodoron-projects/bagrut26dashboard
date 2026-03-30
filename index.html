@@ -205,11 +205,126 @@ body { font-family:'Heebo',sans-serif; background:var(--bg); color:var(--text); 
 
 /* Responsive */
 @media(max-width:600px) {
-  .nav { gap:.2rem; }
-  .nav-btn { font-size:.64rem; padding:.25rem .45rem; }
-  .q-grid { grid-template-columns:1fr; }
+  /* Header */
+  .hdr { padding:1rem .8rem .6rem; }
+  .hdr h1 { font-size:1.1rem; }
+  .hdr-meta { font-size:.6rem !important; }
+  .hdr-controls { top:.5rem; left:.5rem; gap:.3rem; }
+  .font-ctrl-strip button { width:20px; height:20px; font-size:.6rem; }
+  .font-ctrl-strip span { font-size:.55rem; min-width:22px; }
+
+  /* Countdown */
+  .exam-countdown { flex-wrap:wrap; font-size:.65rem; padding:.25rem .5rem; gap:.3rem; }
+  .ec-timer { font-size:.8rem; }
+
+  /* Daily question */
+  .daily-q-strip { padding:.25rem .5rem; font-size:.68rem; gap:.3rem; }
+  .daily-q-label-sm { font-size:.65rem; }
+  .daily-q-text-sm { font-size:.65rem; }
+
+  /* Search */
+  .search-bar { padding:.25rem .5rem; top:80px; }
+  .search-input { font-size:.72rem; padding:.3rem .6rem; }
+
+  /* Nav actions (3 special buttons) */
+  .nav-actions { padding:.3rem .5rem; gap:.3rem; }
+  .fc-nav-btn { font-size:.58rem !important; padding:.25rem .5rem !important; }
+
+  /* Category legend */
+  .cat-legend { font-size:.52rem; gap:.5rem; padding:.15rem .5rem; }
+
+  /* Topic nav - horizontal scroll */
+  .nav { flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; justify-content:flex-start; padding:.3rem .4rem; gap:.2rem; scrollbar-width:none; }
+  .nav::-webkit-scrollbar { display:none; }
+  .nav-btn { font-size:.58rem; padding:.22rem .4rem; flex-shrink:0; }
+  .nav-section-label { font-size:.55rem !important; padding:.22rem .5rem !important; }
+
+  /* Year nav - horizontal scroll */
+  .nav-yr { flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; justify-content:flex-start; scrollbar-width:none; }
+  .nav-yr::-webkit-scrollbar { display:none; }
+  .nav-yr .nav-btn { font-size:.6rem; flex-shrink:0; }
+
+  /* Cards grid */
+  .q-grid { grid-template-columns:1fr; gap:.4rem; }
   .pred-grid { grid-template-columns:1fr; }
-  .hdr h1 { font-size:1.2rem; }
+  .fc-grid { grid-template-columns:1fr; }
+  .concepts-grid { grid-template-columns:1fr; }
+
+  /* Question cards */
+  .yr-body { padding:0 .5rem .4rem; }
+  .q { font-size:.68rem; }
+  .ans { font-size:.68rem; }
+  .kws { padding:0 .4rem; }
+  .hnt { font-size:.65rem; }
+
+  /* Stats */
+  .stats { gap:.25rem; }
+  .stat { min-width:70px; padding:.35rem; }
+  .stat-n { font-size:1rem; }
+  .stat-l { font-size:.55rem; }
+
+  /* Info boxes */
+  .info { padding:.5rem .6rem; }
+  .info h3 { font-size:.68rem; }
+  .info p, .info li { font-size:.65rem; }
+  .pitfall { padding:.5rem .6rem; }
+  .excl { padding:.4rem .6rem; }
+
+  /* Toggle bar */
+  .tog-bar { gap:.25rem; }
+  .tog { font-size:.62rem; padding:.3rem .5rem; }
+  .mikud-sort-btn { font-size:.62rem; padding:.22rem .5rem; }
+
+  /* Forecast panel */
+  .fc-card { margin-bottom:.5rem; }
+  .fc-card-title { font-size:.75rem; }
+  .fc-q-text { font-size:.65rem; }
+  .fc-q-meta { font-size:.55rem; }
+  .fc-reason { font-size:.58rem; }
+  .fc-mikud { font-size:.62rem; }
+
+  /* Exam simulator */
+  .exsim-header { padding:.5rem .8rem; flex-wrap:wrap; gap:.3rem; }
+  .exsim-title { font-size:.75rem; }
+  .exsim-body { padding:.7rem .8rem; }
+  .exsim-part-title { font-size:.78rem; padding:.4rem .6rem; }
+  .exsim-part-instructions { font-size:.65rem; padding:.4rem .6rem; }
+  .exsim-sub-q { font-size:.72rem; }
+  .exsim-textarea { font-size:.72rem; min-height:60px; }
+  .exsim-q-block { padding:.7rem .8rem; }
+
+  /* Flashcard mode */
+  .fc-mode-header { padding:.5rem .8rem; }
+  .fc-mode-title { font-size:.75rem; }
+  .fc-card-area { padding:.8rem .7rem; }
+  .fc-question-box { padding:.8rem 1rem; font-size:.8rem; }
+  .fc-answer-input { font-size:.75rem; min-height:70px; }
+  .fc-reveal-btn { font-size:.78rem; }
+  .fc-answer-reveal { font-size:.75rem; padding:.7rem .9rem; }
+  .fc-rating-area button { font-size:.7rem; padding:.45rem .3rem; }
+
+  /* Mikud overlay */
+  .mikud-box { width:98vw; max-height:90vh; }
+  .mikud-section-title { font-size:.72rem; }
+  .mikud-row { font-size:.7rem; }
+
+  /* Exam mode */
+  .exam-header { padding:.5rem .8rem; }
+  .exam-q-text { font-size:.78rem; }
+  .exam-q-input { font-size:.72rem; }
+
+  /* Scroll-aware: less aggressive on mobile */
+  body.scrolled-down .nav { max-height:32px; }
+  body.scrolled-down .nav-yr { max-height:28px; }
+
+  /* Panel padding */
+  .panel { padding:.6rem; }
+  .sec-h { font-size:.9rem; }
+
+  /* Topic summary */
+  .topic-summary { padding:.5rem .7rem; }
+  .concept-term { font-size:.65rem; }
+  .concept-def { font-size:.6rem; }
 }
 
 /* ===== FORECAST TAB ===== */
