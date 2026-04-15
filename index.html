@@ -927,6 +927,24 @@ mark.search-hl { background:#fef08a; color:#92400e; border-radius:2px; padding:0
 .daily-q-refresh { padding:.15rem .4rem; border:1px solid var(--line); color:var(--dim); background:transparent; border-radius:4px; cursor:pointer; font-size:.75rem; flex-shrink:0; }
 .daily-q-refresh:hover { background:var(--card2); }
 
+/* ===== DAILY QUESTION DIALOG (mobile) ===== */
+.dq-dialog { display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:300; align-items:center; justify-content:center; padding:1rem; }
+.dq-dialog.open { display:flex; animation:fadeIn .2s; }
+.dq-dialog-box { background:var(--card); border-radius:14px; width:100%; max-width:500px; max-height:90vh; display:flex; flex-direction:column; box-shadow:0 10px 50px rgba(0,0,0,.3); overflow:hidden; }
+.dq-dialog-head { display:flex; align-items:center; justify-content:space-between; padding:.8rem 1rem; background:linear-gradient(135deg,#6366f1,#8b5cf6); color:#fff; }
+.dq-dialog-title { font-weight:700; font-size:1rem; }
+.dq-dialog-close { background:transparent; border:none; color:#fff; font-size:1.2rem; cursor:pointer; padding:.2rem .5rem; border-radius:4px; line-height:1; }
+.dq-dialog-close:hover { background:rgba(255,255,255,.2); }
+.dq-dialog-body { padding:1rem; overflow-y:auto; flex:1; direction:rtl; }
+.dq-dialog-meta { font-size:.7rem; color:var(--dim); margin-bottom:.5rem; padding-bottom:.5rem; border-bottom:1px solid var(--line); }
+.dq-dialog-q { font-size:.95rem; line-height:1.6; color:var(--text); font-weight:600; margin-bottom:1rem; }
+.dq-dialog-reveal { width:100%; padding:.6rem; background:linear-gradient(135deg,#6366f1,#8b5cf6); color:#fff; border:none; border-radius:8px; font-size:.85rem; font-weight:700; cursor:pointer; font-family:'Heebo'; }
+.dq-dialog-ans { font-size:.85rem; line-height:1.7; color:var(--text); padding:.7rem .8rem; background:rgba(99,102,241,.08); border-right:3px solid #6366f1; border-radius:0 8px 8px 0; margin-top:.5rem; }
+.dq-dialog-foot { display:flex; gap:.5rem; padding:.7rem 1rem; border-top:1px solid var(--line); background:var(--card2); }
+.dq-dialog-refresh { flex:1; padding:.5rem; border:1px solid #6366f1; color:#6366f1; background:transparent; border-radius:6px; font-size:.78rem; font-weight:600; cursor:pointer; font-family:'Heebo'; }
+.dq-dialog-refresh:hover { background:#6366f1; color:#fff; }
+.dq-dialog-ok { flex:1; padding:.5rem; background:var(--dim); color:#fff; border:none; border-radius:6px; font-size:.78rem; font-weight:600; cursor:pointer; font-family:'Heebo'; }
+
 /* ===== COLLAPSIBLE TOPIC INFO ===== */
 .topic-header { transition:background .15s; padding:.4rem .6rem; border-radius:8px; }
 .topic-header:hover { background:var(--card2); }
@@ -1088,6 +1106,26 @@ body.scrolled-down .nav-expand-hint { display: inline; }
   <div class="daily-q-drop" id="dailyQDrop" style="display:none">
     <div class="daily-q-ans-sm" id="dailyQAns"></div>
     <div class="daily-q-meta-sm" id="dailyQMeta"></div>
+  </div>
+</div>
+
+<!-- Daily Question Dialog (mobile only) -->
+<div id="dailyQDialog" class="dq-dialog" onclick="if(event.target===this)closeDailyQDialog()">
+  <div class="dq-dialog-box">
+    <div class="dq-dialog-head">
+      <span class="dq-dialog-title">☀️ שאלת היום</span>
+      <button class="dq-dialog-close" onclick="closeDailyQDialog()" title="סגור">✕</button>
+    </div>
+    <div class="dq-dialog-body">
+      <div class="dq-dialog-meta" id="dqDialogMeta"></div>
+      <div class="dq-dialog-q" id="dqDialogQ"></div>
+      <button class="dq-dialog-reveal" id="dqDialogRevealBtn" onclick="revealDqDialogAnswer()">📖 הצג תשובה</button>
+      <div class="dq-dialog-ans" id="dqDialogAns" style="display:none"></div>
+    </div>
+    <div class="dq-dialog-foot">
+      <button class="dq-dialog-refresh" onclick="refreshDailyQ();openDailyQDialog()">🔀 שאלה אחרת</button>
+      <button class="dq-dialog-ok" onclick="closeDailyQDialog()">סגור</button>
+    </div>
   </div>
 </div>
 
@@ -7007,11 +7045,40 @@ function initDailyQuestion() {
 
 function revealDailyQ() { toggleDailyQ(document.querySelector('.daily-q-toggle')); }
 function toggleDailyQ(btn) {
+  // במובייל - פתח דיאלוג מלא במקום dropdown
+  if (window.innerWidth <= 600) {
+    openDailyQDialog();
+    return;
+  }
   const drop = document.getElementById('dailyQDrop');
   if (!drop) return;
   const open = drop.style.display === 'none';
   drop.style.display = open ? 'block' : 'none';
   btn.textContent = open ? '▴' : '▾';
+}
+
+// Mobile dialog functions
+function openDailyQDialog() {
+  const dlg = document.getElementById('dailyQDialog');
+  if (!dlg) return;
+  // העבר תוכן מהשורה לדיאלוג
+  document.getElementById('dqDialogQ').textContent = document.getElementById('dailyQText').textContent || '';
+  document.getElementById('dqDialogMeta').textContent = document.getElementById('dailyQMeta').textContent || '';
+  document.getElementById('dqDialogAns').innerHTML = document.getElementById('dailyQAns').innerHTML || '';
+  // אפס את מצב הצגת התשובה
+  document.getElementById('dqDialogAns').style.display = 'none';
+  document.getElementById('dqDialogRevealBtn').style.display = 'block';
+  dlg.classList.add('open');
+}
+
+function closeDailyQDialog() {
+  const dlg = document.getElementById('dailyQDialog');
+  if (dlg) dlg.classList.remove('open');
+}
+
+function revealDqDialogAnswer() {
+  document.getElementById('dqDialogAns').style.display = 'block';
+  document.getElementById('dqDialogRevealBtn').style.display = 'none';
 }
 
 function refreshDailyQ() {
