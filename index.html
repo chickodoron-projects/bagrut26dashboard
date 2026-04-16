@@ -220,13 +220,13 @@ body { font-family:'Heebo',sans-serif; background:var(--bg); color:var(--text); 
   .exam-countdown { padding:.15rem .4rem; font-size:.62rem; gap:.25rem; }
   .ec-timer { font-size:.72rem; }
 
-  /* Daily Q - compact */
-  .daily-q-strip { padding:.2rem .5rem; gap:.2rem; font-size:.62rem; }
-  .daily-q-label-sm { font-size:.6rem; }
-  .daily-q-text-sm { font-size:.6rem; }
-  .font-ctrl-strip button { width:18px; height:18px; font-size:.55rem; }
-  .font-ctrl-strip span { font-size:.55rem; min-width:22px; }
-  .font-ctrl-strip { margin-left:.1rem; gap:.1rem; }
+  /* Daily Q - mobile: show only label + arrow (opens dialog) */
+  .daily-q-strip { padding:.35rem .6rem; gap:.4rem; font-size:.75rem; justify-content:flex-end; }
+  .daily-q-label-sm { font-size:.78rem; font-weight:700; }
+  .daily-q-text-sm { display:none; }
+  .daily-q-refresh { display:none; }
+  .font-ctrl-strip { display:none; }
+  .daily-q-toggle { font-size:.85rem; padding:.2rem .55rem; }
 
   /* Search bar */
   .search-bar { padding:.2rem .4rem; gap:.2rem; top:auto; position:relative; }
