@@ -1185,21 +1185,22 @@ body.scrolled-down .nav-expand-hint { display: inline; }
 // =============================================
 // 🔐 LOGIN PIN: 4138 (for all teachers)
 // 🔐 ADMIN PIN: 1857 (for chickodoron@gmail.com only)
+// NOTE: All emails are normalized to lowercase for case-insensitive matching
 const AUTHORIZED_EMAILS = [
   'chickodoron@gmail.com',
   'orenmiz111@gmail.com',
   'ariklv@gmail.com',
-  'Agamdr3009@gmail.com',
-  'RigbyJostar@gmail.com',
-  'Guyb3204@gmail.com',
+  'agamdr3009@gmail.com',
+  'rigbyjostar@gmail.com',
+  'guyb3204@gmail.com',
   'emmanuellaogbidi27@gmail.com',
-  'Orel060606@gmail.com',
-  'Ofrigamli@gmail.com',
+  'orel060606@gmail.com',
+  'ofrigamli@gmail.com',
   'ashamir3112@gmail.com',
   'tamar7968016@gmail.com',
-  'Michaelaterry2009@gmail.com',
+  'michaelaterry2009@gmail.com',
   'matanco74@gmail.com',
-  'Guymordoch059@gmail.com',
+  'guymordoch059@gmail.com',
   'student12@gmail.com',
   'student13@gmail.com',
   'student14@gmail.com',
@@ -1210,6 +1211,13 @@ const AUTHORIZED_EMAILS = [
   'student19@gmail.com',
   'student20@gmail.com'
 ];
+
+// Helper: case-insensitive email check (defensive against any case in list)
+function isAuthorizedEmail(email) {
+  if (!email) return false;
+  const normalized = String(email).trim().toLowerCase();
+  return AUTHORIZED_EMAILS.some(e => String(e).trim().toLowerCase() === normalized);
+}
 
 // =============================================
 // OAUTH CONFIGURATION
@@ -1273,7 +1281,7 @@ function verifyEmailFallback() {
     return;
   }
   
-  if (!AUTHORIZED_EMAILS.includes(email)) {
+  if (!isAuthorizedEmail(email)) {
     showOAuthError(`❌ המייל ${email} לא מורשה. בדוק עם המורה.`);
     return;
   }
@@ -1332,10 +1340,12 @@ function checkLoginPin(email) {
   const pin = document.getElementById('loginPinInput')?.value?.trim();
   
   if (pin === '4138') {
+    // Normalize email to lowercase for consistent storage
+    const normalizedEmail = (email || '').trim().toLowerCase();
     // Success - store both email and pin
-    localStorage.setItem('authenticatedUser', email);
+    localStorage.setItem('authenticatedUser', normalizedEmail);
     localStorage.setItem('authenticatedPin', '4138');
-    window.CURRENT_USER = email;
+    window.CURRENT_USER = normalizedEmail;
     
     // Close pin dialog
     closeLoginPinDialog();
@@ -1351,17 +1361,17 @@ function checkLoginPin(email) {
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
       logoutBtn.style.display = 'block';
-      logoutBtn.title = `התחבר כ: ${email}`;
+      logoutBtn.title = `התחבר כ: ${normalizedEmail}`;
     }
     
     // Show admin button for all 3 teachers
     const adminBtn = document.getElementById('adminBtn');
     const teacherEmails = ['chickodoron@gmail.com', 'orenmiz111@gmail.com', 'ariklv@gmail.com'];
-    if (adminBtn && teacherEmails.includes(email)) {
+    if (adminBtn && teacherEmails.includes(normalizedEmail)) {
       adminBtn.style.display = 'block';
     }
     
-    console.log(`✅ Logged in: ${email}`);
+    console.log(`✅ Logged in: ${normalizedEmail}`);
   } else {
     alert('❌ קוד שגוי');
     document.getElementById('loginPinInput').value = '';
@@ -1388,10 +1398,10 @@ function handleOAuthLogin(response) {
     }).join(''));
     
     const payload = JSON.parse(jsonPayload);
-    const userEmail = payload.email;
+    const userEmail = (payload.email || '').trim().toLowerCase();
     
     // בדוק אם המייל ברשימה
-    if (!AUTHORIZED_EMAILS.includes(userEmail)) {
+    if (!isAuthorizedEmail(userEmail)) {
       showOAuthError(`❌ המייל ${userEmail} לא מורשה. בדוק עם המורה.`);
       return;
     }
@@ -1414,10 +1424,10 @@ function showOAuthError(message) {
 }
 
 function checkAuthOnLoad() {
-  const savedEmail = localStorage.getItem('authenticatedUser');
+  const savedEmail = (localStorage.getItem('authenticatedUser') || '').trim().toLowerCase();
   const savedPin = localStorage.getItem('authenticatedPin');
   
-  if (savedEmail && savedPin === '4138' && AUTHORIZED_EMAILS.includes(savedEmail)) {
+  if (savedEmail && savedPin === '4138' && isAuthorizedEmail(savedEmail)) {
     window.CURRENT_USER = savedEmail;
     const overlay = document.getElementById('oauthOverlay');
     if (overlay) {
@@ -1577,12 +1587,13 @@ function addAuthorizedEmail() {
     return;
   }
   
-  if (AUTHORIZED_EMAILS.includes(email)) {
+  if (isAuthorizedEmail(email)) {
     alert('המייל כבר ברשימה');
     return;
   }
   
-  AUTHORIZED_EMAILS.push(email);
+  // Normalize to lowercase before storing (prevents future case-mismatch bugs)
+  AUTHORIZED_EMAILS.push(email.toLowerCase());
   input.value = '';
   
   // Refresh list
